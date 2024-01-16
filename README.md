@@ -12,3 +12,9 @@ Step 2: Download and managed the dotfiles.
 ```
 chezmoi init git@github.com:a45s67/dotfiles.git
 ```
+
+Update
+```
+chezmoi update
+chezmoi apply -v
+```
