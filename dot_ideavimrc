@@ -1,0 +1,96 @@
+set ideajoin
+set highlightedyank
+set surround
+set NERDTree
+set easymotion
+
+set so=5 " 保留 top, bottom 5 行空間
+set incsearch " 輸入 serach patern 時會立即移動
+set hlsearch
+
+" file and buffer
+nnoremap <C-p> :action GotoFile<CR>
+nnoremap <C-e> :action RecentFiles<CR>
+noremap 'w :q<CR>
+" noremap 's :w<CR>
+noremap <Space>w <C-W>
+nnoremap <Space>= :action ReformatCode<CR>
+
+" easymotion
+map 's <Plug>(easymotion-s)
+map 'f <Plug>(easymotion-f)
+
+" navigate: line
+nmap gh <Action>(EditorLineStart)
+nmap gl <Action>(EditorLineEnd)
+vmap gh 0
+vmap gl $
+
+" navigate: cross ref, goto implementation, type declaration... etc.
+nmap gr <Action>(FindUsages)
+nmap gi <Action>(GotoImplementation)
+nmap gd <Action>(GotoDeclaration)
+nmap gT <Action>(GotoTest)
+nmap gp <Action>(GotoSuperMethod)
+nmap gy <Action>(GotoTypeDeclaration)
+
+" navigate: jump, error, symbol
+nmap <Space>s <Action>(GotoSymbol)
+nmap <C-o> <Action>(Back)
+nmap <C-i> <Action>(Forward)
+nnoremap <C-[> <C-T>
+
+nmap ]d <Action>(GoToNextError)
+nmap [d <Action>(GotoPreviousError)
+nmap ]w <Action>(SwitcherNextProblem)
+nmap [w <Action>(SwitcherPreviousProblem)
+nmap ]g <Action>(VcsShowNextChangeMarker)
+nmap [g <Action>(VcsShowPrevChangeMarker)
+nmap ]m <Action>(MethodDown)
+nmap [m <Action>(MethodUp)
+
+" Show doc, error description
+nmap <s-c-k> <Action>(QuickJavaDoc)
+nmap <s-k> <Action>(ExpressionTypeInfo)
+nmap <c-k> <Action>(ShowErrorDescription)
+
+" Search
+nmap <Space>/ <Action>(FindInPath) " Global find (like Ctrl-Shift-F)
+" nmap <Shift><Shift> <Action>(SearchEverywhere) " 沒 shift 這東西，這設定只是我用來回想的
+nmap <leader>g <Action>(Vcs.QuickListPopupAction)
+nmap // :nohlsearch<CR>
+
+" Cyclic though suggestion list
+imap <C-]> <C-n>
+imap <C-[> <C-p>
+
+" Edit: Copy paste,
+imap <C-v> <Action>($Paste)
+imap <C-c> <Action>($Copy)
+imap <C-x> <Action>($Cut)
+vmap <C-v> <Action>($Paste)
+vmap <C-c> <Action>($Copy)
+vmap <C-x> <Action>($Cut)
+
+" Extend selection
+imap <C-k> <Action>(EditorSelectWord)
+imap <C-j> <Action>(EditorUnSelectWord)
+vmap <C-k> <Action>(EditorSelectWord)
+vmap <C-j> <Action>(EditorUnSelectWord)
+set selectmode=mouse,key,ideaselection " [Turning off "enter normal mode on selection" in IdeaVIM : r/IntelliJIDEA](https://www.reddit.com/r/IntelliJIDEA/comments/pv9u0v/turning_off_enter_normal_mode_on_selection_in/)
+
+" Edit and reload ideavim config
+nmap 'r :source ~/.ideavimrc<CR>
+nmap 'e :e ~/.ideavimrc<CR>
+
+" UI settings. (e.g., Hide all window, toggle full screen, font size)
+nmap `q <Action>(HideAllWindows)
+nmap `z <Action>(ToggleFullScreen)
+nmap `h <Action>(ToggleInlayHintsGloballyAction)
+nmap `w <Action>(EditorToggleShowWhitespaces)
+map <C-=> <Action>(EditorIncreaseFontSize)
+map <C--> <Action>(EditorDecreaseFontSize)
+
+map <C-n> :NERDTree<CR>
+
+
