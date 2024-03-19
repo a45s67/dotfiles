@@ -11,14 +11,14 @@ set hlsearch
 " file and buffer
 nnoremap <C-p> :action GotoFile<CR>
 nnoremap <C-e> :action RecentFiles<CR>
-noremap 'w :q<CR>
-" noremap 's :w<CR>
+noremap 'q :q<CR>
+noremap 's :w<CR>
 noremap <Space>w <C-W>
 nnoremap <Space>= :action ReformatCode<CR>
 
 " easymotion
-map 's <Plug>(easymotion-s)
-map 'f <Plug>(easymotion-f)
+" map 's <Plug>(easymotion-s)
+" map 'f <Plug>(easymotion-f)
 
 " navigate: line
 nmap gh <Action>(EditorLineStart)
