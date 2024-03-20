@@ -148,7 +148,7 @@ LFCD="$HOME/.local/bin/lfcd.sh"
 if [[ -f "$LFCD" ]]; then
     source "$LFCD"
 fi
-eval "$(lua ~/github/z.lua/z.lua --init zsh)"
+eval "$(zoxide init zsh)"
 
 [[ -s ~/.gvm/scripts/gvm ]] && source ~/.gvm/scripts/gvm
 gvm use go1.19 > /dev/null
