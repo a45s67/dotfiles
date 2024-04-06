@@ -1,0 +1,10 @@
+[".tmux.conf"]
+# Discussion of how to include settings from external gitmodules
+# [chezmoi externals of `git` type · Issue #1421 · twpayne/chezmoi](https://github.com/twpayne/chezmoi/issues/1421)
+# Commit date: 2024/04/01
+    type = "file"
+    url = "https://raw.githubusercontent.com/gpakosz/.tmux/cb13ee2cdd87d3996923773ee37b0cd777ea825e/.tmux.conf"
+    exact = true
+    stripComponents = 1
+    refreshPeriod = "168h"
+    
