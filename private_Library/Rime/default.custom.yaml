@@ -1,0 +1,63 @@
+patch:
+  # ascii_mode、inline、no_inline、vim_mode 等等设定，可参考 /Library/Input Methods/Squirrel.app/Contents/SharedSupport/squirrel.yaml
+  schema_list:
+    - schema: luna_pinyin
+    - schema: luna_pinyin_fluency
+    - schema: rime_ice
+    - schema: bopomofo
+    - schema: bopomofo_tw
+    - schema: cangjie5
+    - schema: stroke
+    - schema: terra_pinyin
+
+  switcher:
+    caption: 〔方案選單〕
+    hotkeys:
+      - Control+grave
+      - Control+Shift+grave
+      - F4
+    save_options:
+      - full_shape
+      - ascii_punct
+      - simplification
+      - traditionalization
+      - extended_charset
+      - zh_hant
+      - zh_hans
+      - zh_hant_tw
+      - emoji
+      - search_single_char
+    fold_options: true
+    abbreviate_options: true
+    option_list_separator: '／'
+
+  menu:
+    page_size: 8
+
+  punctuator:
+    full_shape:
+      __include: punctuation:/full_shape
+    half_shape:
+      __include: punctuation:/half_shape
+
+  key_binder:
+    bindings:
+      __patch:
+        - key_bindings:/emacs_editing
+        - key_bindings:/move_by_word_with_tab
+        - key_bindings:/paging_with_minus_equal
+        - key_bindings:/paging_with_comma_period
+        - key_bindings:/numbered_mode_switch
+  key_binder/bindings/+:
+      - { when: has_menu, accept: bracketleft, send: Up }
+      - { when: has_menu, accept: bracketright, send: Down }
+        
+  ascii_composer:
+    good_old_caps_lock: true
+    switch_key:
+      Shift_L: commit_text
+      Shift_R: inline_ascii
+      Control_L: noop
+      Control_R: noop
+      Caps_Lock: clear
+      Eisu_toggle: clear
