@@ -164,8 +164,10 @@ export COLORTERM=truecolor
 
 # cudnn setting to solve that libcuda.so is not found
 export LD_LIBRARY_PATH=/usr/lib/wsl/lib:$LD_LIBRARY_PATH
-export PATH="$HOME/.phpenv/bin:$PATH"
-eval "$(phpenv init -)"
+if [[ $(uname) != "Darwin" ]]; then
+    export PATH="$HOME/.phpenv/bin:$PATH"
+    eval "$(phpenv init -)"
+fi
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
