@@ -126,7 +126,7 @@ alias py='python3'
 alias j='z'
 alias t='tmux -2'
 alias lg='lazygit'
-alias n='nnn'
+alias yz='yazi'
 alias win-dev='tmuxp load win-dev'
 
 # laravel
