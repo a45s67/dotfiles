@@ -46,7 +46,7 @@ yabai -m rule --add app="^Google Chrome$" space=^2 manage=on
 yabai -m rule --add app="^Obsidian$" space=^2 manage=on
 yabai -m rule --add app="*Music$" space=4
 
-yabai -m rule --add app="^Chromium" space=^3 manage=on
-yabai -m rule --add app="^Burp Suite" space=^3 manage=on
+# yabai -m rule --add app="^Chromium" space=^3 manage=on
+# yabai -m rule --add app="^Burp Suite" space=^3 manage=on
 
 echo "yabai configuration loaded.."

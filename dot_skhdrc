@@ -60,6 +60,11 @@ alt - 5 : yabai -m space --focus 5
 alt - 6 : yabai -m space --focus 6
 alt - 7 : yabai -m space --focus 7
 
+# focus desktop on monitor 2
+alt - z : index="$(yabai -m query  --spaces --display 2 | jq '.[0].index')" && \
+          yabai -m space --focus ${index}
+alt - x : index="$(yabai -m query  --spaces --display 2 | jq '.[1].index')" && \
+          yabai -m space --focus ${index}
 
 # create desktop and follow focus - uses jq for parsing json (brew install jq)
 ctrl + cmd - d : yabai -m space --create && \
@@ -95,6 +100,12 @@ shift + alt - w : yabai -m window --focus prev || \
 shift + alt - n : yabai -m window --display next; yabai -m display --focus next
 shift + alt - p : yabai -m window --display previous; yabai -m display --focus previous
 
+# Focus neighbor monitor
+# alt-[
+alt - 0x1E : yabai -m display --focus next || \
+                    yabai -m display --focus first
+
+# Change layout
 shift + alt - f : yabai -m config --space mouse layout float
 shift + alt - b : yabai -m config --space mouse layout bsp
 shift + alt - s : yabai -m config --space mouse layout stack
