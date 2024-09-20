@@ -41,7 +41,7 @@ nmap <C-i> <Action>(Forward)
 nnoremap <C-[> <C-T>
 
 nmap ]d <Action>(GoToNextError)
-nmap [d <Action>(GotoPreviousError)
+nmap [d <Action>(GoToPreviousError)
 nmap ]w <Action>(SwitcherNextProblem)
 nmap [w <Action>(SwitcherPreviousProblem)
 nmap ]g <Action>(VcsShowNextChangeMarker)
