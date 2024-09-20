@@ -1,8 +1,7 @@
-set ideajoin
 set highlightedyank
 set surround
 set NERDTree
-set easymotion
+set quickscope " 依照 quickscope 文件說明, 必須在 sneak 後才宣告
 
 set so=5 " 保留 top, bottom 5 行空間
 set incsearch " 輸入 serach patern 時會立即移動
@@ -16,9 +15,19 @@ noremap 's :w<CR>
 noremap <Space>w <C-W>
 nnoremap <Space>= :action ReformatCode<CR>
 
-" easymotion
-" map 's <Plug>(easymotion-s)
-" map 'f <Plug>(easymotion-f)
+" kjump
+" nmap <Space>s :action KJumpAction<cr>
+nmap <Space>w :action KJumpAction.Word0<cr>
+nmap <Space>l :action KJumpAction.Line<cr>
+
+" Harpoon
+nmap <M-j> <action>(HarpoonerOpenFile0)
+nmap <M-k> <action>(HarpoonerOpenFile1)
+nmap <M-l> <action>(HarpoonerOpenFile2)
+nmap <M-;> <action>(HarpoonerOpenFile3)
+
+nmap <leader>hm <action>(HarpoonerQuickMenu)
+nmap <leader>ha <action>(HarpoonerAddFile)
 
 " navigate: line
 nmap gh <Action>(EditorLineStart)
@@ -92,5 +101,7 @@ map <C-=> <Action>(EditorIncreaseFontSize)
 map <C--> <Action>(EditorDecreaseFontSize)
 
 map <C-n> :NERDTree<CR>
+
+
 
 
