@@ -1,7 +1,6 @@
 set highlightedyank
 set surround
 set NERDTree
-set quickscope " 依照 quickscope 文件說明, 必須在 sneak 後才宣告
 
 set so=5 " 保留 top, bottom 5 行空間
 set incsearch " 輸入 serach patern 時會立即移動
