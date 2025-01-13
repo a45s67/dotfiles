@@ -1,2 +1,7 @@
 ~/github/mumumu/mumumu -c ~/github/mumumu/config.json -g kita-kirakira
 
+
+if [[ $(uname) == "Darwin" ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
