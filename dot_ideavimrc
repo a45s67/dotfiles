@@ -25,8 +25,8 @@ nmap <M-k> <action>(HarpoonerOpenFile1)
 nmap <M-l> <action>(HarpoonerOpenFile2)
 nmap <M-;> <action>(HarpoonerOpenFile3)
 
-nmap <leader>hm <action>(HarpoonerQuickMenu)
-nmap <leader>ha <action>(HarpoonerAddFile)
+nmap <M-m> <action>(HarpoonerQuickMenu)
+nmap <M-a> <action>(HarpoonerAddFile)
 
 " navigate: line
 nmap gh <Action>(EditorLineStart)
@@ -48,8 +48,8 @@ nmap <C-o> <Action>(Back)
 nmap <C-i> <Action>(Forward)
 nnoremap <C-[> <C-T>
 
-nmap ]d <Action>(GoToNextError)
-nmap [d <Action>(GoToPreviousError)
+nmap ]d <Action>(GotoNextError)
+nmap [d <Action>(GotoPreviousError)
 nmap ]w <Action>(SwitcherNextProblem)
 nmap [w <Action>(SwitcherPreviousProblem)
 nmap ]g <Action>(VcsShowNextChangeMarker)
