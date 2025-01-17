@@ -1,0 +1,335 @@
+# Rime schema settings
+# encoding: utf-8
+# 《洋蔥純注音版 設定頁》
+schema:
+  schema_id: bopomo_onion
+  name: "☆注音(洋蔥純注音版)☆"
+  version: "202405"
+  author:
+    - 『洋蔥』
+  description: |
+    注音符號輸入，採用「大千式」鍵盤排列。
+
+  dependencies:
+    - cangjie5
+
+switches:
+  - name: ascii_mode
+    reset: 1
+    states: ["中文", "英文"]
+  - name: full_shape
+    reset: 0
+    states: ["半形", "全形"]
+  - name: ascii_punct
+    reset: 0
+    states: ["。，", "．，"]
+  - name: simplification
+    reset: 0
+    states: ["原體", "简体"]
+#   - options: [ utf8, big5, gbk ]
+# #    reset: 0
+#     states:
+#       - UTF-8
+#       - BIG5
+#       - GBK
+
+engine:
+  filters:
+    #     - charset_filter@big5
+    #     - charset_filter@gbk
+    - simplifier@zh_cn
+    - reverse_lookup_filter@bpm_reverse_lookup
+    - uniquifier
+  processors:
+    - ascii_composer
+    - recognizer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
+  #    - fluency_editor
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - affix_segmentor@reverse2_lookup
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - punct_translator
+    # - table_translator@custom_phrase
+    - script_translator@reverse2_lookup
+    - script_translator
+################################### 濾鏡 ######################################
+zh_cn:
+  opencc_config: tw2s.json
+  tips: all
+  tags: [abc]
+
+# big5:
+#   tags: [ abc ]
+# gbk:
+#   tags: [ abc ]
+################################### 選單 ######################################
+menu:
+  # alternative_select_keys: "QAZWSXEDCRFV3467"  #刻意讓「3467」置後，使聲調後按「3467」不上屏選字。
+  # alternative_select_keys: "QAZWSXEDCRFV"
+  alternative_select_labels: [QY, AH, ZN, WU, SJ, XM]
+  page_size: 6
+################################### 拼寫 ######################################
+speller:
+  alphabet: "1qaz2wsxedcrfv5tgbyhnujm8ik,9ol.0p;/-3467 "
+  initials: "1qaz2wsxedcrfv5tgbyhnujm8ik,9ol.0p;/-"
+  finals: " 6347"
+  delimiter: "\\"
+  use_space: true
+  algebra:
+    ##### 非正確注音（補空碼或慣用發音）轉寫 #####
+    - xform/[)(]//
+    ########################################
+    - xform/iu/iU/ #iou
+    - xform/ui/uI/ #uei
+    - xform/ong/ung/
+    - xform/yi?/i/
+    - xform/wu?/u/
+    - xform/iu/v/
+    - xform/([jqx])u/$1v/
+    - xform/([iuv])n/$1en/
+    - xform/zhi?/Z/
+    - xform/chi?/C/
+    - xform/shi?/S/
+    - xform/([zcsr])i/$1/
+    - xform/ai/A/
+    - xform/ei/I/
+    - xform/ao/O/
+    - xform/ou/U/
+    - xform/ang/K/
+    - xform/eng/G/
+    - xform/an/M/
+    - xform/en/N/
+    - xform/er/R/
+    - xform/eh/E/
+    - xform/([iv])e/$1E/
+    ##############字母簡化############
+    - abbrev/^([bpmfdtnlgkhjqxZCSrzcsiuvaoeEAIOUMNKGR]).+$/$1/
+    - abbrev/^([bpmfdtnlgkhjqxZCSrzcsiuv])([iuvaoeEAIOUMNKG])\d$/$1$2/ #[R]
+    - abbrev/^([bpmfdtnlgkhjqxZCSrzcs])([iuv])([aoeEAIOUMNKG])\d$/$1$2$3/ #[R]
+    #    - abbrev/^([bpmfdtnlgkhjqxZCSrzcsiuv]).+(\d)$/$1$2/ #使得ㄎˇㄈˇ（可否）可以打的出來 #新增iuv，使得ㄧˊㄉˊ（贏得）可以打出
+    #    - abbrev/^([bpmfdtnlgkhjqxZCSrzcs]).+(\d)$/$1$2/ #同上，但少了ㄧㄨㄩ
+    - abbrev/^([bpmfdtnlgkhjqx]).+(\d)$/$1$2/ #同上，但再少了ㄓㄔㄕㄖㄗㄘㄙ
+    ##############內嵌注音文############
+    - xform|^＊([12345])$|r$1| #聲調，「ㄖ」「聲調」打出聲調不被省略
+    - abbrev|^＊([bpmfdtnlgkhjqxZCSrzcsiuvaoeEAIOUMNKGR])$|$1|
+    - abbrev|^＊([bpmfdtnlgkhjqx])$|$1 | #\x31=數字1
+    - erase|^＊([bpmfdtnlgkhjqx])$|| #消除不含聲調注音（不消除也不影響）
+    - xform|^＊([ZCSrzcsiuvaoeEAIOUMNKGR])$|$1 | #\x31=數字1
+    - xform|^＊＊|| #開頭「＊＊」使注音文不被前面縮略，該正則回復
+    ##########注音聲韻母亂序##########
+    - derive/^([bpmfdtnlgkhjqxZCSrzcs])([iuv])/$2$1/
+    - derive/^([iuv])([aoeEAIOUMNKG])/$2$1/ #[R]
+    - derive/^([bpmfdtnlgkhjqxZCSrzcs])([aoeEAIOUMNKG])/$2$1/ #[R]
+    - derive/^([bpmfdtnlgkhjqxZCSrzcs])([iuv])([aoeEAIOUMNKG])/$3$2$1/ #[R]
+    - derive/^([bpmfdtnlgkhjqxZCSrzcs])([iuv])([aoeEAIOUMNKG])/$3$1$2/ #[R]
+    - derive/^([bpmfdtnlgkhjqxZCSrzcs])([iuv])([aoeEAIOUMNKG])/$2$3$1/ #[R]
+    - derive/^([bpmfdtnlgkhjqxZCSrzcs])([iuv])([aoeEAIOUMNKG])/$1$3$2/ #[R]
+    - "xlit|bpmfdtnlgkhjqxZCSrzcsiuvaoeEAIOUMNKGR12345|1qaz2wsxedcrfv5tgbyhnujm8ik,9ol.0p;/- 6347|"
+################################### 主翻譯器 ###################################
+translator:
+  dictionary: bopomo_onion.extended
+  prism: bopomo_onion
+  # enable_charset_filter: false
+  enable_completion: false #新版有長詞補全，用此關閉
+  enable_user_dict: true
+  # initial_quality: 0
+  preedit_format:
+    - "xlit|1qaz2wsxedcrfv5tgbyhnujm8ik,9ol.0p;/- 6347|ㄅㄆㄇㄈㄉㄊㄋㄌㄍㄎㄏㄐㄑㄒㄓㄔㄕㄖㄗㄘㄙㄧㄨㄩㄚㄛㄜㄝㄞㄟㄠㄡㄢㄣㄤㄥㄦˉˊˇˋ˙|"
+    - 'xform/\\/ /' #全形空格　 #半形空格  #| #⁞ #⁝ #⋮ #¦ #┆
+############################## 以下為短語 ##########################################
+# custom_phrase:
+#   dictionary: ""
+#   user_dict: bopomo_onion_phrase
+#   db_class: stabledb
+#   enable_completion: false
+#   enable_sentence: false
+#   initial_quality: 1
+################################ 以下為使用ooo反查注音 #############################
+reverse2_lookup:
+  tag: reverse2_lookup
+  dictionary: cangjie5
+  # enable_charset_filter: false
+  enable_completion: false
+  enable_user_dict: true
+  prefix: "="
+  suffix: " "
+  tips: "《反查》"
+  preedit_format:
+    #    - "xlit|abcdefghijklmnopqrstuvwxyz|ABCDEFGHIJKLMNOPQRSTUVWXYZ|"
+    - "xlit|abcdefghijklmnopqrstuvwxyz|日月金木水火土竹戈十大中一弓人心手口尸廿山女田難卜符|"
+    - xform/^/《反查》/
+    - 'xform/\\/ /'
+
+bpm_reverse_lookup:
+  tags: [reverse2_lookup]
+  overwrite_comment: true
+  dictionary: bopomo_onion.extended
+  comment_format:
+    - xform/iu/iU/ #iou
+    - xform/ui/uI/ #uei
+    - xform/ong/ung/
+    - xform/yi?/i/
+    - xform/wu?/u/
+    - xform/iu/v/
+    - xform/([jqx])u/$1v/
+    - xform/([iuv])n/$1en/
+    - xform/zhi?/Z/
+    - xform/chi?/C/
+    - xform/shi?/S/
+    - xform/([zcsr])i/$1/
+    - xform/ai/A/
+    - xform/ei/I/
+    - xform/ao/O/
+    - xform/ou/U/
+    - xform/ang/K/
+    - xform/eng/G/
+    - xform/an/M/
+    - xform/en/N/
+    - xform/er/R/
+    - xform/eh/E/
+    - xform/([iv])e/$1E/
+    - xform/1//
+    - "xlit|bpmfdtnlgkhjqxZCSrzcsiuvaoeEAIOUMNKGR2345|ㄅㄆㄇㄈㄉㄊㄋㄌㄍㄎㄏㄐㄑㄒㄓㄔㄕㄖㄗㄘㄙㄧㄨㄩㄚㄛㄜㄝㄞㄟㄠㄡㄢㄣㄤㄥㄦˊˇˋ˙|"
+################################### 符號處理 ####################################
+punctuator:
+  import_preset: bopomo_onion_symbols
+
+key_binder:
+  import_preset: default
+  bindings:
+    ### 避 RIME 原設定鍵位衝突 ###
+    - { accept: comma, send: comma, when: has_menu }
+    - { accept: comma, send: comma, when: paging }
+    - { accept: period, send: period, when: has_menu }
+    - { accept: period, send: period, when: paging }
+    # - { accept: minus, send: minus, when: has_menu }
+    # - { accept: minus, send: minus, when: paging }
+    # - { accept: equal, send: equal, when: has_menu }
+    # - { accept: equal, send: equal, when: paging }
+    ### 切分移位 ###
+    - { accept: Up, send: KP_Left, when: composing } #左移一個注音
+    - { accept: Up, send: Up, when: paging } #修正上條目出現的bug
+    ##
+    - { accept: Right, send: Shift+Right, when: composing } #右移一整個字
+    - { accept: Shift+Right, send: Right, when: composing } #右移一個注音
+    - { accept: Shift+Left, send: KP_Left, when: composing } #左移一個注音
+    #關#    - {accept: Shift+space, send: Shift+Right, when: composing} #首節
+    # - {accept: Shift+space, send: KP_Left, when: composing} #左移一個注音
+    # - {accept: Left, send: KP_Left, when: composing} #左移一個注音
+    ##
+    # - {accept: Shift+Tab, send: Right, when: composing} #右移一個注音
+    # - {accept: Tab, send: KP_Left, when: composing} #左移一個注音
+    ### 選字翻頁 ###
+    - { accept: Left, send: Page_Up, when: paging } #直式選單用 #has_menu
+    - { accept: Right, send: Page_Down, when: paging } #直式選單用 #has_menu
+    #關#    - {accept: Up, send: Page_Up, when: paging} #橫式選單用
+    #關#    - {accept: Down, send: Page_Down, when: paging} #橫式選單用
+    #關#    - {accept: Left, send: Left, when: has_menu} #橫式選單用 #send: Shift+Up
+    #關#    - {accept: Right, send: Right, when: has_menu} #橫式選單用 #send: Shift+Down
+    #其他快捷鍵翻頁
+    - { accept: Shift+Up, send: Page_Up, when: paging } #選字時「Shift」+「上」翻頁。
+    - { accept: Shift+Down, send: Page_Down, when: has_menu } #選字時「Shift」+「下」翻頁。
+    #關#    - {accept: Shift+Tab, send: Page_Up, when: paging} #選字時「Shift」+「tab」翻頁。
+    #關#    - {accept: Tab, send: Page_Down, when: has_menu} #「tab」翻頁。
+    - { accept: Shift+C, send: Page_Up, when: has_menu }
+    - { accept: Shift+space, send: Page_Down, when: has_menu } #選字時「Shift」+「空白鍵」翻頁。 #send: Right #send: Down
+    - { accept: Shift+I, send: Page_Up, when: has_menu }
+    - { accept: Shift+K, send: Page_Down, when: has_menu }
+    #左邊選字
+    - { accept: Shift+Y, send: Control+1, when: has_menu }
+    - { accept: Shift+H, send: Control+2, when: has_menu }
+    - { accept: Shift+N, send: Control+3, when: has_menu }
+    - { accept: Shift+U, send: Control+4, when: has_menu }
+    - { accept: Shift+J, send: Control+5, when: has_menu }
+    - { accept: Shift+M, send: Control+6, when: has_menu }
+    #右邊選字
+    - { accept: Shift+Q, send: Control+1, when: has_menu }
+    - { accept: Shift+A, send: Control+2, when: has_menu }
+    - { accept: Shift+Z, send: Control+3, when: has_menu }
+    - { accept: Shift+W, send: Control+4, when: has_menu }
+    - { accept: Shift+S, send: Control+5, when: has_menu }
+    - { accept: Shift+X, send: Control+6, when: has_menu }
+    ##回復到 composing 狀態：
+    #關#    - {accept: Shift+space, send: Shift+Left, when: paging} #於選單列選字時，回復到輸入列（避免有時回復不了，故增加）。
+    - { accept: Tab, send: Shift+Left, when: paging } #於選單列選字時，回復到輸入列（避免有時回復不了，故增加）。
+    ### 空白鍵 ###
+    - { accept: space, send: Return, when: paging } #方向鍵選字時，space直接上屏（避免被一聲空格影響）
+    # - {accept: space, send: Page_Down, when: paging} #方向鍵選字時，space翻頁（上條遮屏需開啟，否則「=」+「符號」會誤按）
+    # - {accept: space, send: Down, when: has_menu}
+    # - {accept: space, send: Down, when: paging}
+    # - {accept: space, send: space, when: composing}
+    #關#    - {accept: space, send: Escape, when: composing} #空碼時，按空格清除
+    #關#    - {accept: space, send: space, when: has_menu} #非空碼時，空白還是空白
+    ### 補一聲和上屏 raw_input （ paging 時，空白鍵無法輸出一聲 ） ###
+    - { accept: Shift+D, send: space, when: has_menu }
+    - { accept: Shift+L, send: space, when: has_menu }
+    - { accept: Shift+E, send: Shift+Return, when: composing }
+    - { accept: Shift+O, send: Shift+Return, when: composing }
+    ### 上屏 preedit（注音文）編碼 ###
+    - { accept: Shift+F, send: Control+Return, when: has_menu }
+    ### 刪除鍵 ###
+    - { accept: BackSpace, send: Control+BackSpace, when: has_menu } #〔關〕刪除前一個拼音字符〔開〕：刪除整組拼音字符（一個字）
+    - { accept: Shift+BackSpace, send: BackSpace, when: has_menu }
+    #關#    - {accept: backslash, send: BackSpace, when: has_menu} #「\」鍵位刪除一個拼音字符。
+    # - {accept: backslash, send: Shift+BackSpace, when: has_menu} #「\」鍵位刪除整組拼音字符（一個字）。
+    #關#    - {accept: backslash, send: Shift+Return, when: has_menu} #「\」鍵位上屏英文。
+    ### 另設快捷刪除鍵 ###
+    - { accept: Shift+R, send: BackSpace, when: composing }
+    - { accept: Shift+P, send: BackSpace, when: composing }
+    - { accept: Shift+T, send: Delete, when: composing }
+    - { accept: Shift+G, send: Escape, when: composing }
+    ### 另設快捷鍵 ###
+    - { accept: Shift+V, send: Home, when: composing }
+    - { accept: Shift+B, send: End, when: composing }
+    ### 功能快捷鍵 ###
+    # - {accept: Return, send: space, when: has_menu}
+    ### 避聲調重複按 ###
+    - { accept: 3, send: Escape, when: always }
+    # - {accept: 3, send: Escape, when: composing}
+    - { accept: 3, send: 3, when: has_menu }
+    - { accept: 4, send: Escape, when: always }
+    # - {accept: 4, send: Escape, when: composing}
+    - { accept: 4, send: 4, when: has_menu }
+    - { accept: 6, send: Escape, when: always }
+    # - {accept: 6, send: Escape, when: composing}
+    - { accept: 6, send: 6, when: has_menu }
+    - { accept: 7, send: Escape, when: always }
+    # - {accept: 7, send: Escape, when: composing}
+    - { accept: 7, send: 7, when: has_menu }
+### ctrl 打出標點 ###
+#關#    - {accept: "Control+comma", send: "less", when: always} #「逗號」#接受「Contol」+「,」直出「<」
+#關#    - {accept: "Control+period", send: "greater", when: always} #「句號」#接受「Contol」+「.」直出「>」
+#關#    - {accept: "Control+slash", send: "question", when: always} #「問號」#接受「Contol」+「/」直出「？」
+#關#    - {accept: "Control+apostrophe", send: "quotedbl", when: always} #「頓號」#接受「Contol」+「'」直出「"」
+### 空白鍵不上屏設置 ###
+# - {accept: space, send: bar, when: composing}
+# - {accept: space, send: space, when: has_menu}
+
+editor:
+  bindings:
+    # space: commit_composition #使用 fluency_editor 時開啟
+    Return: confirm #使用 express_editor 時開啟
+    KP_Enter: confirm #使用 express_editor 時開啟
+    Shift+Return: commit_raw_input # 上屏原始輸入
+    Control+Return: commit_script_text # 上屏變換後輸入
+########################## 用正則調出各種功能 ##############################
+recognizer:
+  patterns:
+    # uppercase: "^[A-Z][-_+.'0-9A-Za-z]*$"
+#    lua: "^'/[';]?[a-z0-9./-]*$"
+
+# __patch:
+#   # 使用八股文語言模型
+#   - grammar:/hant?
+#   # 用家自選配置
+#   - bopomo_onion.custom:/patch?
