@@ -137,12 +137,6 @@ PATH=$HOME/.local/bin/cmake-3.22.2-linux-x86_64/bin:$PATH
 
 # ~/github/nyancat/src/nyancat 
 
-# fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-# ref: https://github.com/junegunn/fzf/issues/634
-export FZF_DEFAULT_COMMAND='rg --hidden --no-ignore -l ""'
-export FZF_CTRL_T_COMMAND='rg --hidden --no-ignore -l ""'
-
 # g - go manager
 export GOPATH="$HOME/go"; export GOROOT="$HOME/.go"; export PATH="$GOPATH/bin:$PATH"; # g-install: do NOT edit, see https://github.com/stefanmaric/g
 
@@ -178,3 +172,7 @@ export NNN_PLUG='f:finder;o:fzopen;d:diffs;t:nmount;v:imgview;p:preview-tui'
 export NNN_FIFO=/tmp/nnn_fifo
 
 . "$HOME/.asdf/asdf.sh"
+
+. "$HOME/.atuin/bin/env"
+
+eval "$(atuin init zsh)"
