@@ -86,7 +86,7 @@ else
     plugins+=(zsh-autosuggestions)
 fi
 plugins=(git)
-# plugins+=(zsh-vi-mode)
+plugins+=(zsh-vi-mode)
 plugins+=(gitfast)
 
 source $ZSH/oh-my-zsh.sh
