@@ -173,7 +173,12 @@ export NNN_FIFO=/tmp/nnn_fifo
 
 . "$HOME/.asdf/asdf.sh"
 
-source <(fzf --zsh)
 
-autoload edit-command-line; zle -N edit-command-line
-bindkey -M vicmd v edit-command-line
+# bindkey after zvm
+# [jeffreytse/zsh-vi-mode: 💻 A better and friendly vi(vim) mode plugin for ZSH.](https://github.com/jeffreytse/zsh-vi-mode#execute-extra-commands)
+function zvm_after_init() {
+    source <(fzf --zsh)
+
+    autoload edit-command-line; zle -N edit-command-line
+    bindkey -M vicmd v edit-command-line
+}
