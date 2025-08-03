@@ -1,15 +1,12 @@
 patch:
   # ascii_mode、inline、no_inline、vim_mode 等等设定，可参考 /Library/Input Methods/Squirrel.app/Contents/SharedSupport/squirrel.yaml
   schema_list:
-    - schema: luna_pinyin
-    - schema: luna_pinyin_fluency
+    - schema: double_pinyin_flypy
     - schema: rime_ice
     - schema: bopomofo
     - schema: bopomofo_tw
     - schema: bopomo_onion
-    - schema: cangjie5
     - schema: stroke
-    - schema: terra_pinyin
 
   switcher:
     caption: 〔方案選單〕
