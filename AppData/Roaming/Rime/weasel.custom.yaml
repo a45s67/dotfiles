@@ -1,0 +1,16 @@
+customization:
+  distribution_code_name: Weasel
+  distribution_version: 0.17.4
+  generator: "Weasel::UIStyleSettings"
+  modified_time: "Wed Aug 13 14:37:45 2025"
+  rime_version: 1.13.1
+patch:
+  "app_options/+":
+    Code.exe: {ascii_mode: true, vim_mode: true}
+    Obsidian.exe: {ascii_mode: true, vim_mode: true}
+    WindowsTerminal.exe: {ascii_mode: true, vim_mode: true}
+    switcheroo.exe: {ascii_mode: true, vim_mode: true}
+  "style/+":
+    color_scheme: purity_of_form_custom
+    page_size: 5
+    horizontal: false
