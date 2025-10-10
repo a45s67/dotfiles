@@ -2,7 +2,8 @@ local wezterm = require 'wezterm'
 local config = {}
 
 -- # Set font and color scheme
-config.font = wezterm.font 'JetBrainsMono Nerd Font'
+config.font = wezterm.font 'DejaVu Sans Mono'
+-- 'JetBrainsMono Nerd Font'
 config.window_background_opacity = 0.8
 config.enable_tab_bar = false
 config.window_decorations = "RESIZE"
