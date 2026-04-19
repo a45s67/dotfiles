@@ -8,16 +8,11 @@ yabai -m config mouse_follows_focus          on
 yabai -m config focus_follows_mouse          off
 yabai -m config window_origin_display        default
 yabai -m config window_placement             second_child
-yabai -m config window_topmost               off
 yabai -m config window_shadow                on
 yabai -m config window_opacity               on
 yabai -m config window_opacity_duration      0.0
 yabai -m config active_window_opacity        1.0
 yabai -m config normal_window_opacity        0.90
-yabai -m config window_border                off
-yabai -m config window_border_width          6
-yabai -m config active_window_border_color   0xff775759
-yabai -m config normal_window_border_color   0xff555555
 yabai -m config insert_feedback_color        0xffd75f5f
 yabai -m config split_ratio                  0.50
 yabai -m config auto_balance                 off
@@ -28,25 +23,23 @@ yabai -m config mouse_drop_action            swap
 
 # general space settings
 yabai -m config layout                       stack
-yabai -m config --space=1 layout             bsp
 yabai -m config top_padding                  5
 yabai -m config bottom_padding               5
 yabai -m config left_padding                 5
-# NOTE: for OBS floating head
-# yabai -m config left_padding                 450
 yabai -m config right_padding                5
 yabai -m config window_gap                   5
 
-# apps to not manage (ignore)
-yabai -m rule --add app!="^WezTerm$" manage=on
-yabai -m rule --add app!="^Zed$" manage=off
+# per-space layout (改用 space 命令)
+yabai -m space 1 --layout bsp
 
-yabai -m rule --add app="^WezTerm$" space=^1
-yabai -m rule --add app="^RubyMine$" space=^1 manage=on
-yabai -m rule --add app="^Google Chrome$" space=^2 manage=on
-yabai -m rule --add app="^Floorp$" space=^2 manage=on
-yabai -m rule --add app="^Obsidian$" space=^2 manage=on
-yabai -m rule --add app="*Music$" space=4
+# rule：預設不管理（讓 macOS 原生行為），白名單裡的才 tile
+yabai -m rule --add app=".*" manage=off
+yabai -m rule --add app="^WezTerm$" manage=on space=^1
+yabai -m rule --add app="^RubyMine$" manage=on space=^1
+yabai -m rule --add app="^Google Chrome$" manage=on space=^2
+yabai -m rule --add app="^Floorp$" manage=on space=^2
+yabai -m rule --add app="^Obsidian$" manage=on space=^2
+yabai -m rule --add app=".*Music$" manage=off space=4
 
 # yabai -m rule --add app="^Chromium" space=^3 manage=on
 # yabai -m rule --add app="^Burp Suite" space=^3 manage=on
