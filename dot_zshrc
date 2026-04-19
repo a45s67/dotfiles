@@ -166,7 +166,7 @@ export NNN_ZLUA=~/github/z.lua/z.lua
 export NNN_PLUG='f:finder;o:fzopen;d:diffs;t:nmount;v:imgview;p:preview-tui'
 export NNN_FIFO=/tmp/nnn_fifo
 
-. "$HOME/.asdf/asdf.sh"
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
 
 # bindkey after zvm
