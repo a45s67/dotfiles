@@ -1,0 +1,15 @@
+# Powerlevel10k
+romkatv/powerlevel10k
+
+# Oh My Zsh compatibility / libraries
+getantidote/use-omz
+ohmyzsh/ohmyzsh path:lib
+
+# Oh My Zsh plugins
+ohmyzsh/ohmyzsh path:plugins/git
+ohmyzsh/ohmyzsh path:plugins/gitfast
+
+# Standalone plugins
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-syntax-highlighting
+jeffreytse/zsh-vi-mode
