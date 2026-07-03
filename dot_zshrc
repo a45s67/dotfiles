@@ -48,8 +48,10 @@ fpath=(${ZDOTDIR:-$HOME}/.antidote/functions $fpath)
 
 autoload -Uz antidote
 
-# Generate static plugin loader when ~/.zsh_plugins.txt is newer.
-if [[ ! ${zsh_plugins}.zsh -nt ${zsh_plugins}.txt ]]; then
+# Generate static plugin loader when it's missing/empty, or when the
+# plugin list is newer. The `-s` check guards against a botched run
+# leaving a 0-byte loader that the mtime test would otherwise lock in.
+if [[ ! -s ${zsh_plugins}.zsh || ${zsh_plugins}.txt -nt ${zsh_plugins}.zsh ]]; then
   antidote bundle <${zsh_plugins}.txt >|${zsh_plugins}.zsh
 fi
 
