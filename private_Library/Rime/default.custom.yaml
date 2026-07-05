@@ -1,14 +1,9 @@
 patch:
-  # 載入朙月拼音擴充詞庫
-  "translator/dictionary": luna_pinyin.extended
   # ascii_mode、inline、no_inline、vim_mode 等等设定，可参考 /Library/Input Methods/Squirrel.app/Contents/SharedSupport/squirrel.yaml
   schema_list:
-    - schema: double_pinyin_flypy
-    - schema: rime_ice
-    - schema: bopomofo
-    - schema: bopomofo_tw
-    - schema: bopomo_onion
-    - schema: stroke
+    - schema: bopomo_onion        # 主力：洋蔥純注音
+    - schema: double_pinyin_flypy # 備援：拼音（rime-ice 版，掛 rime_ice 詞庫）
+    - schema: stroke              # 備援：筆畫，找罕用字用
 
   switcher:
     caption: 〔方案選單〕
