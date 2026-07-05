@@ -94,3 +94,6 @@ fi
 # zoxide
 eval "$(zoxide init zsh)"
 
+# asdf version manager (Ruby 3.3 etc.)
+. "$HOME/.asdf/asdf.sh"
+
