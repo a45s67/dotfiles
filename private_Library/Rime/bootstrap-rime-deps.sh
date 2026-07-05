@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-# 安裝/更新 Rime 相依（rime-ice 全套 + 洋蔥純注音詞庫）。
-# 新機器流程：chezmoi apply → 跑本腳本 → 鼠鬚管「重新部署」。
+# 安裝/更新 Rime 相依（rime-ice 全套 + 洋蔥純注音詞庫）— macOS / Squirrel 版
+# 新機器流程：chezmoi apply → 跑本腳本 → 鼠鬚管選單「重新部署」。
 # 更新 rime-ice 也是重跑本腳本（~/Library/Rime 不是 git repo，別用 git pull）。
+# Windows 用 bootstrap-rime-deps.ps1。
 #
 # 注意：
 # - Squirrel SharedSupport 已內建 bopomofo/stroke/luna_pinyin/cangjie5/essay/prelude，不必安裝。
