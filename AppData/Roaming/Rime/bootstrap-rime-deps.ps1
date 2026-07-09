@@ -1,4 +1,4 @@
-# 安裝/更新 Rime 相依（rime-ice 全套 + 洋蔥純注音詞庫）— Windows / Weasel 版
+﻿# 安裝/更新 Rime 相依（rime-ice 全套 + 洋蔥純注音詞庫）— Windows / Weasel 版
 # 需求：git 在 PATH。用法：powershell -ExecutionPolicy Bypass -File bootstrap-rime-deps.ps1
 # 跑完後在小狼毫選單執行「重新部署」。macOS 用 bootstrap-rime-deps.sh。
 #
