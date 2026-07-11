@@ -451,4 +451,5 @@ tmux_conf_update_plugins_on_reload=true
         set -g @extrakto_popup_size "50%"
         set -g @plugin 'laktak/extrakto'
 
-bind-key p run-shell "sh -c \"tmux list-buffers | fzf --tmux | rg -o '^buffer\\d+' | xargs tmux paste-buffer -p -b; exit 0\""
+# fzf 選 buffer 貼上，並把它移到堆疊頂端（之後 ` ] 可直接再貼同樣內容）
+bind-key p run-shell 'buf=$(tmux list-buffers | fzf --tmux | rg -o "^buffer\d+") || exit 0; tmux paste-buffer -p -b "$buf"; tmux save-buffer -b "$buf" - | tmux load-buffer -; tmux delete-buffer -b "$buf"'
